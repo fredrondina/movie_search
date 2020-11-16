@@ -1,5 +1,7 @@
 <h1>Movie Results</h1>
 <% @movies.each do |movie| %>
+<%= image_tag "https://image.tmdb.org/t/p/w1280/#{movie.poster_url}", :class => "thumbnail", :size => '180x260' %><br>
 <%= movie.title  %>
-<br>
+ <br>
+ <br>
 <%end%>
