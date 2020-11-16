@@ -16,4 +16,12 @@ RSpec.describe 'When I visit the root page' do
     expect(page).to have_content("Two Towers")
     expect(page).to have_content("Return of the King")
   end
+
+  it "I can enter a gibberish movie title and it wont break" do
+    visit '/'
+    fill_in :search_title, with: "jshdfLASDKJFHSLJFH"
+    click_on "Search Movies"
+    expect(page).to have_content("No Results Found")
+    expect(page).to have_link("Try another search")
+  end
 end
