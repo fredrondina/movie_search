@@ -6,7 +6,10 @@ class MoviesController < ApplicationController
       req.params['include_adult'] = false
       req.params['query'] = params["search_title"]
     end
+
     results = JSON.parse(resp.body, symbolize_names: true)
-    binding.pry
+    @movies = results[:results].map do |result|
+      Movie.new(result)
+    end
   end
 end
