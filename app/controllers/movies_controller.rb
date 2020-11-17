@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
   def index
-    # binding.pry
+    @movies = Movie.search(params["search_title"])
   end
 end

@@ -7,4 +7,21 @@ RSpec.describe 'When I visit the root page' do
     fill_in :search_title, with: "Vertigo"
     click_on "Search Movies"
   end
+
+  it "I can enter a movie title and see a list of matches" do
+    visit '/'
+    fill_in :search_title, with: "Lord of the Rings"
+    click_on "Search Movies"
+    expect(page).to have_content("The Fellowship of the Ring")
+    expect(page).to have_content("Two Towers")
+    expect(page).to have_content("Return of the King")
+  end
+
+  it "I can enter a gibberish movie title and it wont break" do
+    visit '/'
+    fill_in :search_title, with: "jshdfLASDKJFHSLJFH"
+    click_on "Search Movies"
+    expect(page).to have_content("No Results Found")
+    expect(page).to have_link("Try another search")
+  end
 end

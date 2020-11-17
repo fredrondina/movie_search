@@ -1,1 +1,12 @@
-<h1>This is a placeholder</h1>
+<h1>Movie Results</h1>
+<% if @movies.length == 0 %>
+  <h3>No Results Found</h3>
+<%else%>
+  <% @movies.each do |movie| %>
+  <%= image_tag "https://image.tmdb.org/t/p/w1280/#{movie.poster_url}", :class => "thumbnail", :size => '180x260' %><br>
+  <%= movie.title  %>
+   <br>
+   <br>
+  <%end%>
+<%end%>
+<%= link_to "Try another search", "/" %>
