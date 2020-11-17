@@ -14,15 +14,8 @@ class Movie
   end
 
   def self.search(search_title)
-    resp = Faraday.get('https://api.themoviedb.org/3/search/movie') do |req|
-      req.params['api_key'] = ENV['movie_db_key']
-      req.params['language'] = 'en-US'
-      req.params['include_adult'] = false
-      req.params['query'] = search_title
-    end
-
-    results = JSON.parse(resp.body, symbolize_names: true)
-      @movies = results[:results].map do |result|
+    results = MoviedbService.new.search(search_title)
+    @movies = results[:results].map do |result|
       Movie.new(result)
     end
   end
