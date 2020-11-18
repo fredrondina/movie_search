@@ -3,8 +3,9 @@ class Movie
                 :title,
                 :release_date,
                 :poster_url,
-                :overview,
-                :director
+                :overview
+
+    attr_accessor :director
 
   def initialize(movie)
     @id = movie[:id]
@@ -30,6 +31,15 @@ class Movie
       req.params['append_to_response'] = 'credits'
     end
     result = JSON.parse(resp.body, symbolize_names: true)
-    Movie.new(result)
+    shown_movie = Movie.new(result)
+    loaded_director = shown_movie.set_director(result[:credits][:crew])
+    shown_movie.director = loaded_director
+    return shown_movie
+  end
+
+  def set_director(cast)
+    cast.each do |member|
+      return member[:name] if member[:known_for_department] == "Directing"
+    end
   end
 end
