@@ -24,14 +24,4 @@ RSpec.describe 'When I visit the root page' do
     expect(page).to have_content("No Results Found")
     expect(page).to have_link("Try another search")
   end
-
-  it "After ive searched, I can click a movie's title and see more detailed info" do
-    visit '/'
-    fill_in :search_title, with: "Lord of the Rings"
-    click_on "Search Movies"
-    expect(page).to have_link("The Lord of the Rings: The Two Towers")
-    click_link("The Lord of the Rings: The Two Towers")
-    expect(page).to have_content("Release Date: 2002-12-18")
-    expect(page).to have_content("Frodo and Sam are trekking to Mordor to destroy the One Ring of Power while Gimli, Legolas and Aragorn search for the orc-captured Merry and Pippin. All along, nefarious wizard Saruman awaits the Fellowship members at the Orthanc Tower in Isengard.")
-  end
 end
