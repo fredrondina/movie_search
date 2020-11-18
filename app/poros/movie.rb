@@ -18,7 +18,7 @@ class Movie
 
   def self.search(search_title)
     results = MoviedbService.new.search(search_title)
-    @movies = results[:results].map do |result|
+    movies = results[:results].map do |result|
       Movie.new(result)
     end
   end
