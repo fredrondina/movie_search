@@ -4,6 +4,6 @@ class MoviesController < ApplicationController
   end
 
   def show
-    
+    @movie = Movie.get_by_id(params[:movie_id])
   end
 end
