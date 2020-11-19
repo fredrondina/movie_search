@@ -4,7 +4,7 @@
 <%else%>
   <% @movies.each do |movie| %>
   <%= image_tag "https://image.tmdb.org/t/p/w1280/#{movie.poster_url}", :class => "thumbnail", :size => '180x260' %><br>
-  <%= movie.title  %>
+  <%= link_to "#{movie.title}", "/movies/#{movie.id}"  %>
    <br>
    <br>
   <%end%>
