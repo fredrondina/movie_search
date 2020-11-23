@@ -3,4 +3,12 @@
 <h3>Directed by: <%=@movie.director%></h3>
 <h4><%=@movie.overview%></h2>
 <h4>Release Date: <%=@movie.release_date%></h2><br>
+<% if @rating.rated? %>
+<%else%>
+  <p>This movie has not yet been rated, what did you think?</p><br>
+<%end%>
+
+<p><%= button_to "Thumbs Up: #{@rating.thumbs_up}", "/rating/#{@rating.movie_id}/up" %></p>
+
+<p><%= button_to "Thumbs Down: #{@rating.thumbs_down}", "/rating/#{@rating.movie_id}/down" %></p>
 <%= link_to "Try another search", "/" %>
