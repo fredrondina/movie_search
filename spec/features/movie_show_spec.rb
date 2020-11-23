@@ -12,13 +12,27 @@ RSpec.describe "When I visit a movies show page" do
     expect(page).to have_content("Directed by: Stanley Kubrick")
   end
 
-  it "I can see the number of thumbs up and thumbs down a movie has recieved" do
+  it "I can rate up or down a movie" do
     visit '/movies/426'
     expect(page).to have_content("Directed by: Alfred Hitchcock")
     expect(page).to have_button("Thumbs Up")
     expect(page).to have_button("Thumbs Down")
     click_on("Thumbs Up: 0")
     expect(page).to have_button("Thumbs Up: 1")
+    expect(current_path).to eq('/movies/426')
+  end
+
+  it "I can only rate a movie once per session" do
+    visit '/movies/11'
+    expect(page).to have_content("Directed by: George Lucas")
+    click_on("Thumbs Up: 0")
+    expect(page).to have_button("Thumbs Up: 1")
+    expect(current_path).to eq('/movies/11')
+
+
+    click_on("Thumbs Up: 1")
+    expect(page).to have_content("You've already rated this film, why not rate another?")
+    expect(current_path).to eq('/movies/11')
   end
 
   it "When a movie has no ratings I see a message saying such" do
